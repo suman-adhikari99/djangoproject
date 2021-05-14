@@ -8,8 +8,13 @@
 </head>
 <body>
     {% for post in posts %}
-    <h1>{{post.title}}</h1>
-    <p>by {{post.author}}on </p>
+    <article>
+
+        <h2><a href="#">{{post.title}}</a></h2>
+        <p>{{post.text}}</p>
+        <time>published date: {{post.published_date}}</time>
+    </article>
+    
     {% endfor%}
     <h1>name is:{{name}}</h1>
 <h1>hello</h1>

@@ -7,15 +7,17 @@
     <header>
         <h1>My Blog Posts</h1>
     </header>
-    <article>
-        <time>Published: 20.12.2020, 08:12</time>
-        <h2><a href="#">My first Post</a></h2>
-        <p>Demo text</p>
-    </article>
-    <article>
-        <time>Published: 20.12.2020, 08:12</time>
-        <h2><a href="#">My first Post</a></h2>
-        <p>Demo text</p>
-    </article>
+    
+      
+        {% for post in posts %}
+        <article>
+    
+            <h2><a href="#">{{post.title}}</a></h2>
+            <p>{{post.text}}</p>
+            <time>published date: {{post.published_date}}</time>
+            <p>author:{{post.author}}</p>
+        </article>
+
+        {% endfor %}
 </body>
 </html>
