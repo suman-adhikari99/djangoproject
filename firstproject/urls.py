@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.urls.conf import include
 
+import blog
+
 urlpatterns = [
    
     path('blog/',include('blog.urls')),
     path('', include('blog.urls')),
+    path('post/<int:pk>/',include('blog.urls')),
     
 
     path('admin/', admin.site.urls),
