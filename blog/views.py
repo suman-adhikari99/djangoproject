@@ -2,9 +2,9 @@
 from django.utils import timezone
 
 from django.http import HttpResponse
-from .models import Post
+from .models import Post,Person ,Companies,email
 from django import forms
-from .forms import PostForm, DocumentForm
+from .forms import PostForm, DocumentForm,Subscribe
 from django.shortcuts import redirect, render, get_list_or_404
 from django.core.paginator import Paginator , PageNotAnInteger
 
@@ -58,5 +58,18 @@ def upload(request):
 
 
     
+from firstproject.settings import EMAIL_HOST_USER
+from django.core.mail import message, send_mail
 
+def subscribe(request):
+    sub = Subscribe()
+    if request.method == 'POST':
+        sub = Subscribe(request.POST)
+        subject = 'Welcome to Achievers Group'
+        message = 'You are viewing demo'
+        recepient = str(sub['Email'].value())
+        print(recepient)
+        send_mail(subject,message,EMAIL_HOST_USER,[recepient], fail_silently = False)
+        return render(request,'success.html',{'recepient': recepient})
+    return render(request, 'email.html', {'form':sub})
    
