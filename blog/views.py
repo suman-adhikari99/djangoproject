@@ -2,7 +2,7 @@
 from django.utils import timezone
 
 from django.http import HttpResponse
-from .models import Post,Person ,Companies,email
+from .models import Post
 from django import forms
 from .forms import PostForm, DocumentForm,Subscribe
 from django.shortcuts import redirect, render, get_list_or_404

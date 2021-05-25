@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import fields
 from django.db.models.base import Model
-from .models import Post, Document,email
+from .models import Post, Document
 
 
 class PostForm(forms.ModelForm):
@@ -14,11 +14,6 @@ class DocumentForm(forms.ModelForm):
         model = Document
         fields= ['title','document']
 
-class Email(forms.ModelForm):
-    class meta:
-        Model= email
-        fields=['email']
 
 class Subscribe(forms.Form):
     Email=forms.EmailField()
-    
