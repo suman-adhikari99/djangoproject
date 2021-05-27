@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import fields
 from django.db.models.base import Model
-from .models import Post, Document
+from .models import Post, Document,Comment
 
 
 class PostForm(forms.ModelForm):
@@ -17,3 +17,10 @@ class DocumentForm(forms.ModelForm):
 
 class Subscribe(forms.Form):
     Email=forms.EmailField()
+    name=forms.CharField(max_length=29)
+    chooseFile=forms.FileField()
+
+class Comments(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields= ['name', 'email', 'body']

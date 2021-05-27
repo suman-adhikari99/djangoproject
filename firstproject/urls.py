@@ -25,11 +25,7 @@ import blog
 urlpatterns = [
    
     path('blog/',include('blog.urls')),
-   # path('', include('blog.urls')),
-    #path('post/<int:pk>/',include('blog.urls')),
-    #path('post/new/', include('blog.urls')),
-    
-
+  
     path('admin/', admin.site.urls),
 ]
 if settings.DEBUG:

@@ -10,5 +10,10 @@ urlpatterns = [
     path('post/new/',views.post_new, name="post_new"),
     path('file_upload/' , views.upload, name="upload"),
     path('email/' , views.subscribe, name="subscribe"),
+    path('mailmass/' , views.mailmass, name="mailmass"),
+    path('attach/' , views.attach, name="attach"),
+    path('form/' , views.fetch, name="form"),
+
+
 
 ]
