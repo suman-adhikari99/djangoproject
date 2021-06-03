@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
-{% block body %}
-    <article>
-        <h2>{{post.title}}</h2>
-        <p>{{post.text}}</p>
-        <time>Published Date: {{post.published_date}}</time>
-        <h2>Published by: {{post.author}}</h2>
-    </article>
-    <h2>comments</h2>
-    {% for comment in comments%}
-    {{comment.name}}
-    {{comment.body}}
-    {{}}
-
-    {% endfor%}
-{% endblock %}
+    {% block body %}
+        
+        <article>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.text }}</p>
+            <time>Published date: {{post.published_date}}</time>
+        </article>
+        <h2>Comments</h2>
+        {% for comment in comments %}
+            {{comment.name}}
+            {{comment.body}}
+        {% endfor %}
+        
+{% endblock  %}   

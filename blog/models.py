@@ -26,20 +26,25 @@ class Document(models.Model):
 
 class form(models.Model):
     email=models.EmailField()
-    name=models.CharField(max_length=29,default="")
-    file=models.FileField(upload_to='images/',default="")
+    #name=models.CharField(max_length=29,default="")
+    #file=models.FileField(upload_to='images/',default="")
 
 class Comment(models.Model):
-    post=models.ForeignKey(Post, on_delete=models.CASCADE, related_name='Comments')
-    name=models.CharField(max_length=20)
+    post=models.ForeignKey(Post,on_delete=models.CASCADE, related_name='comments')
+    name=models.CharField(max_length=30)
     email=models.EmailField()
-    body=models.CharField(max_length=1000) 
-    created_on =models.DateField(timezone.now)
+    body=models.TextField(max_length=1000) 
+    created_on =models.DateTimeField(auto_now_add=True)
     active=models.BooleanField(default=True)
 
-    class meta:
-        ordering=['created_on']
+    class Meta:
+        ordering = ['created_on']
 
     def __str__(self):
-        return 'comment() by {}'.format(self.body,self.name)
+        return 'comment {} by {}'.format(self.body,self.name)
 
+
+class employee(models.Model):
+    name=models.CharField(max_length=40)
+    position=models.CharField(max_length=40)
+    address=models.CharField(max_length=40)

@@ -3,10 +3,10 @@ from os import name
 from django.utils import timezone
 
 from django.http import HttpResponse
-from .models import Post,form,Comment
+from .models import Post,form,Comment, employee
 from django import forms
-from .forms import PostForm, DocumentForm,Subscribe,Comments
-from django.shortcuts import redirect, render, get_list_or_404
+from .forms import PostForm, DocumentForm,Subscribe,CommentForm, employeeform
+from django.shortcuts import redirect, render, get_list_or_404,get_object_or_404
 from django.core.paginator import Paginator , PageNotAnInteger
 
 # Create your views here.
@@ -14,14 +14,15 @@ from django.core.paginator import Paginator , PageNotAnInteger
 def post_list(request):
     posts = Post.objects.all()
     paginator = Paginator(posts, 3)
-    # print(paginator.num_pages)
+    print(paginator.num_pages)
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
-        # print(posts)
+        print(posts)
     except PageNotAnInteger:
         posts = paginator.page(1)
     return render(request, 'post_list.html', {'page':page, 'posts':posts})
+
 
 
 #def post_list(request):
@@ -136,35 +137,33 @@ def attach(request):
         #send_mail(subject,message,EMAIL_HOST_USER,[recepient], fail_silently = False)
         email = EmailMessage('Hello', file, EMAIL_HOST_USER, [recepient])
         email.content_subtype='html'
-        with open('D:/Pictures/zMessenger_Lite/53395e8f1a1b188101ed33305b241c23.0.jpg','r',encoding='Latin-1') as attachfile:
-            image_name= attachfile.name
-            image_type=imghdr.what(attachfile.name)
-            image_data=attachfile.read()
-            email.attach('suman',image_data)  # may be because of this line, when i send mail and open it 'no preview' issue is occur. 
-        #email.attach_file('D:/Pictures/zMessenger_Lite/53395e8f1a1b188101ed33305b241c23.0.jpg')
+        
+        email.attach_file('D:/New folder/Capture.JPG')    
         email.send()
+        
+        return render(request,'success.html',{'recepient': recepient})
+    return render(request, 'email.html', {'form':sub})
     
     
     
-def post_detail(request,pk):
-    post=get_list_or_404(Post,pk=pk)
-    comments=post.comments.filter(active=True)
-    new_comment= None
+def post_detail(request, pk):
+    post=Post.objects.get(pk=pk)
+    comments = post.comments.filter(active=True)
+    new_comment = None
 
-    if request.method=='POST':
-        comment_form=Comments(request.POST)
+    #Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            new_comment=comment_form.save(commit=False)
-            new_comment.post=post
+            new_comment = comment_form.save(commit=False)
+            new_comment.post= post
             new_comment.save()
 
-        else:
-            comment_form=comments()
-        return render(request,'post_detail.html',{'post':post, 'comments':comments, 'new_comment':new_comment})
+    else:
+        comment_form = CommentForm()
 
+    return render(request, 'post_detail.html', {'post':post, 'comments': comments, 'new_comment':new_comment,'comment_form':comment_form})
+                                           
     
     
     
-
-       # return render(request,'success.html',{'recepient': recepient})
-    # render(request, 'email.html', {'form':sub})
