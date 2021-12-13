@@ -1,0 +1,11 @@
+ssh
+scp
+top 
+kill
+chmod
+chown
+file operation
+cat/dev/null
+cron
+system ctl
+gunicorn|uvicorn
