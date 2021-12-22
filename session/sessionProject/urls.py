@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from session import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/', views.home),
+    path('page2/',views.page2),
+    path('count/', views.countview),
+    path('index/',views.index),
+    path('addItem/',views.addItem),
+    path('displayItems/',views.displayCart),
+    path('countsession/',views.pageCount),
+    path('additemsession/',views.addItemSession),
+    path('displayitemsession',views.displayCartSession)
 ]
